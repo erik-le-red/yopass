@@ -24,7 +24,7 @@ export default function App() {
             <div className="card-body p-6 sm:p-10">
               <Routes>
                 <Route
-                  path="/"
+                  path="/admin"
                   element={READ_ONLY ? <ReadOnlyLanding /> : <CreateSecret />}
                 />
                 {READ_ONLY ? (
