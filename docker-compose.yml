@@ -23,3 +23,15 @@ services:
       timeout: 3s
       retries: 3
       start_period: 5s
+    labels:
+      # Middleware
+      - traefik.http.middlewares.my-auth.basicauth.users=erik.pena:$2y$10$OgSzyBBH0aMBDxGF44d62OqIvH./fX3pMHwIB731B03jHsN1UjQNO
+      # Router for protected path
+      - traefik.http.routers.myapp.rule=Host(`details.doverunner.space`)
+      - traefik.http.routers.myapp-protected.middlewares=my-auth
+      - traefik.http.routers.myapp-protected.entrypoints=websecure
+      - traefik.http.routers.myapp-protected.tls=true
+      # Router for normal traffic (no auth)
+      - traefik.http.routers.myapp-protected.rule=Host(`details.doverunner.space`) && PathPrefix(`/#/s`)
+      - traefik.http.routers.myapp.entrypoints=websecure
+      - traefik.http.routers.myapp.tls=true
