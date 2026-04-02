@@ -61,12 +61,6 @@ test.describe('Footer Links', () => {
 
     // Check that imprint link is not present
     await expect(page.locator('a:has-text("Imprint")')).not.toBeVisible();
-
-    // Check that the text contains bullet separator and created by text
-    const footerText = page.locator('footer div.flex.flex-wrap');
-    await expect(footerText).toContainText(
-      'Privacy Notice•Created by Johan Haals',
-    );
   });
 
   test('should show only imprint link when configured', async ({ page }) => {
@@ -101,10 +95,6 @@ test.describe('Footer Links', () => {
     await expect(
       page.locator('a:has-text("Privacy Notice")'),
     ).not.toBeVisible();
-
-    // Check that the text contains bullet separator and created by text
-    const footerText = page.locator('footer div.flex.flex-wrap');
-    await expect(footerText).toContainText('Imprint•Created by Johan Haals');
   });
 
   test('should show both privacy notice and imprint links when both are configured', async ({
@@ -145,12 +135,6 @@ test.describe('Footer Links', () => {
       'https://example.com/imprint',
     );
     await expect(imprintLink).toHaveAttribute('target', '_blank');
-
-    // Check that both links are on the same line with bullet separators
-    const footerText = page.locator('footer div.flex.flex-wrap');
-    await expect(footerText).toContainText(
-      'Privacy Notice•Imprint•Created by Johan Haals',
-    );
   });
 
   test('should show footer links on all pages when configured', async ({

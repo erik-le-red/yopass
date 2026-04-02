@@ -12,6 +12,7 @@ export default function App() {
   const { DISABLE_UPLOAD, READ_ONLY, PRIVACY_NOTICE_URL, IMPRINT_URL } =
     useConfig();
   const { t } = useTranslation();
+  const effectiveDisableUpload = window.location.hash.startsWith('#/s/') ? true : DISABLE_UPLOAD;
   return (
     <div className="min-h-screen bg-base-200 flex flex-col overflow-x-hidden">
       <HashRouter>
@@ -29,7 +30,7 @@ export default function App() {
                 {READ_ONLY ? (
                   <Route path="/upload" element={<ReadOnlyLanding />} />
                 ) : (
-                  !DISABLE_UPLOAD && (
+                  !effectiveDisableUpload && (
                     <Route path="/upload" element={<StreamingUpload />} />
                   )
                 )}
@@ -76,14 +77,13 @@ export default function App() {
                 </>
               )}
               <span className="text-base-content/70">
-                {t('footer.createdBy')}{' '}
                 <a
-                  href="https://github.com/jhaals"
+                  href="https://doverunner.com"
                   className="text-primary hover:text-primary-focus font-medium transition-colors duration-200 underline decoration-dotted underline-offset-4 hover:decoration-solid"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Johan Haals
+                  DoveRunner &copy; {new Date().getFullYear()}
                 </a>
               </span>
             </div>
