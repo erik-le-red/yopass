@@ -13,7 +13,7 @@ services:
     ports:
       - "80"
     environment:
-      - MEMCACHED=memcached:11211
+      - MEMCACHED=SERVICE_NAME_MEMCACHED:11211
       - PORT=80
       - PRIVACY_NOTICE_URL=https://doverunner.com/privacy-policy/
       - DISABLE_FEATURES=true
